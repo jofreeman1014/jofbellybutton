@@ -4,7 +4,6 @@ function buildMetadata(sample) {
 
   // Use `d3.json` to fetch the metadata for a sample
     // Use d3 to select the panel with id of `#sample-metadata`
-  // console.log(sample);
   var url = `/metadata/${sample}`;
   d3.json(url).then(function(response) {
 
@@ -12,24 +11,17 @@ function buildMetadata(sample) {
 
     var data = response;
     var metadata = d3.select("#sample-metadata");
-    metadata.html("")
-    metadata.append("div").html(`Age: ${response.AGE}`)
-    metadata.append("div").html(`BBTYPE: ${response.BBTYPE}`)
-    metadata.append("div").html(`Ethnicity: ${response.ETHNICITY}`)
-    metadata.append("div").html(`Gender: ${response.GENDER}`)
-    metadata.append("div").html(`Location: ${response.LOCATION}`)
-    metadata.append("div").html(`WFREQ: ${response.WFREQ}`)
-    metadata.append("div").html(`Sample #: ${response.sample}`)
-  });
-  
-    // Use `.html("") to clear any existing metadata
+    metadata.html("");
+    metadata.append("div").html(`Age: ${response.AGE}`);
+    metadata.append("div").html(`BBTYPE: ${response.BBTYPE}`);
+    metadata.append("div").html(`Ethnicity: ${response.ETHNICITY}`);
+    metadata.append("div").html(`Gender: ${response.GENDER}`);
+    metadata.append("div").html(`Location: ${response.LOCATION}`);
+    metadata.append("div").html(`WFREQ: ${response.WFREQ}`);
+    metadata.append("div").html(`Sample #: ${response.sample}`);
+    buildGauge(response.WFREQ);
 
-    // Use `Object.entries` to add each key and value pair to the panel
-    // Hint: Inside the loop, you will need to use d3 to append new
-    // tags for each key-value in the metadata.
-
-    // BONUS: Build the Gauge Chart
-    // buildGauge(data.WFREQ);
+  });    
 };
 
 
@@ -37,7 +29,7 @@ function buildMetadata(sample) {
 function buildCharts(sample) {
 
   // @TODO: Use `d3.json` to fetch the sample data for the plots
-  console.log(sample);
+  // console.log(sample);
   var url2 = `/samples/${sample}`;
 
   d3.json(url2).then(function(response) {
